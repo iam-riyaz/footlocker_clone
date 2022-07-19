@@ -9,12 +9,14 @@ import {
   Link,
   VisuallyHidden,
   chakra,
+  
   useColorModeValue,
 } from '@chakra-ui/react';
-import { FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa';
 
-import AppStoreBadge from '@/components/AppStoreBadge';
-import PlayStoreBadge from '@/components/PlayStoreBadge';
+// import { FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa';
+
+// import AppStoreBadge from '@/components/AppStoreBadge';
+// import PlayStoreBadge from '@/components/PlayStoreBadge';
 
 
 
@@ -33,7 +35,7 @@ export const Footer=()=>{
       <Container as={Stack} maxW={'6xl'} py={10}>
         <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
           <Stack align={'flex-start'}>
-            <ListHeader>Company</ListHeader>
+            {/* <ListHeader>Company</ListHeader> */}
             <Link href={'#'}>About Us</Link>
             <Link href={'#'}>Blog</Link>
             <Link href={'#'}>Careers</Link>
@@ -41,14 +43,14 @@ export const Footer=()=>{
           </Stack>
 
           <Stack align={'flex-start'}>
-            <ListHeader>Support</ListHeader>
+            {/* <ListHeader>Support</ListHeader> */}
             <Link href={'#'}>Help Center</Link>
             <Link href={'#'}>Safety Center</Link>
             <Link href={'#'}>Community Guidelines</Link>
           </Stack>
 
           <Stack align={'flex-start'}>
-            <ListHeader>Legal</ListHeader>
+            {/* <ListHeader>Legal</ListHeader> */}
             <Link href={'#'}>Cookies Policy</Link>
             <Link href={'#'}>Privacy Policy</Link>
             <Link href={'#'}>Terms of Service</Link>
@@ -56,9 +58,9 @@ export const Footer=()=>{
           </Stack>
 
           <Stack align={'flex-start'}>
-            <ListHeader>Install App</ListHeader>
-            <AppStoreBadge />
-            <PlayStoreBadge />
+            {/* <ListHeader>Install App</ListHeader> */}
+            {/* <AppStoreBadge /> */}
+            {/* <PlayStoreBadge /> */}
           </Stack>
         </SimpleGrid>
       </Container>
@@ -78,13 +80,13 @@ export const Footer=()=>{
           <Text>© 2022 Chakra Templates. All rights reserved</Text>
           <Stack direction={'row'} spacing={6}>
             <SocialButton label={'Twitter'} href={'#'}>
-              <FaTwitter />
+              {/* <FaTwitter /> */}
             </SocialButton>
             <SocialButton label={'YouTube'} href={'#'}>
-              <FaYoutube />
+              {/* <FaYoutube /> */}
             </SocialButton>
             <SocialButton label={'Instagram'} href={'#'}>
-              <FaInstagram />
+              {/* <FaInstagram /> */}
             </SocialButton>
           </Stack>
         </Container>
