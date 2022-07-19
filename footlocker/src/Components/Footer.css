@@ -1,0 +1,8 @@
+#style.main_footer{
+    height: 500px;
+    width: 100%;
+    background-color: black;
+    @media (min-width:730px) {
+        background-color:red
+    }
+}
