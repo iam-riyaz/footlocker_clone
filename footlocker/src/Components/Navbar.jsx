@@ -1,3 +1,5 @@
+import "./Navbar.css"
+// import styled from "styled-components";
 import {
   Box,
   Flex,
@@ -6,6 +8,7 @@ import {
   Button,
   Stack,
   Collapse,
+  Image,
   Icon,
   Link,
   Popover,
@@ -14,6 +17,8 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  HStack,
+  styled,
 } from '@chakra-ui/react';
 import {
   HamburgerIcon,
@@ -22,13 +27,28 @@ import {
   ChevronRightIcon,
 } from '@chakra-ui/icons';
 
+import {NavLink} from "react-router-dom"
+
 export  function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
+  
 
   return (
-    <Box>
+    <Box >
       <Flex
-        bg={useColorModeValue('white', 'gray.800')}
+      bg={useColorModeValue('black', 'gray.800')}
+      color={useColorModeValue('gray.600', 'white')}
+      minH={'40px'}
+      py={{ base: 2 }}
+      px={{ base: 4 }}
+      borderBottom={1}
+      borderStyle={'solid'}
+      borderColor={useColorModeValue('gray.200', 'gray.900')}
+      align={'center'}>
+        
+      </Flex>
+      <Flex
+        bg={useColorModeValue('black', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}
         minH={'60px'}
         py={{ base: 2 }}
@@ -51,12 +71,28 @@ export  function Navbar() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Text
+          {/* <Text
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}>
-            Logo
-          </Text>
+            
+          </Text> */}
+          <Image height={"2rem"} src="https://www.footlocker.com/built/227/images/FL/logo.svg"/>
+          <HStack 
+          className='navlink_div'
+          marginLeft={"5rem"} 
+          color={"white"}
+          >
+           < NavLink  to={"/new_arrivals"}> NEW AARRIVALS</NavLink>
+           < NavLink to={"/mans"}> MAN'S</NavLink>
+           < NavLink to={"/womans"}>WOMANS'S </NavLink>
+           < NavLink to={"/kids"}>KIDS </NavLink>
+           < NavLink to={"/clothing"}>CLOTHING </NavLink>
+           < NavLink to={"/release"}>RELEASE </NavLink>
+           < NavLink to={"/brand"}> BRAND</NavLink>
+           < NavLink to={"/sale"}>SALE </NavLink>
+           < NavLink to={"/flx"}> FLX REWARDS </NavLink>
+          </HStack>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             {/* <DesktopNav /> */}

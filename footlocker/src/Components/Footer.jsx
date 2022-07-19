@@ -1,12 +1,20 @@
 // import "./Footer.css"
-import Styled from "styled-components"
+import styled from "styled-components"
+
+
+const FooterDiv = styled.div`
+  background-color: black;
+  height: 500px;
+  width: 100%;
+
+  @media(max-width: 720px){
+    background-color: orange;
+  }
+`;
 
 export const Footer=()=>{
 
-  const FooterDiv = Styled.div
-  `
-    background-color: black:
-  `;
+ 
 
 
   return(
