@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react"
+import { Box, Stack } from "@chakra-ui/react"
 import { useEffect } from "react"
 import { useSelector,useDispatch } from "react-redux"
 import { FilterCompo } from "../Components/FilterCompo"
@@ -16,18 +16,20 @@ const dispatch=useDispatch()
            {
             dispatch(fetchData())
            }
-    })
+    },[dispatch,products?.length])
     console.log(products)
 
     return(
-        <>
+        <> 
         <Box>
+            <Stack display={{md: "flex"}} flexDirection={{md:"row"}}>
             <Box>
                 <FilterCompo/>
             </Box>
             <Box>
                 {/* products will appear here */}
             </Box>
+            </Stack>
         </Box>
         </>
     )
