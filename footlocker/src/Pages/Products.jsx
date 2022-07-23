@@ -1,36 +1,128 @@
-import { Box, Stack } from "@chakra-ui/react"
+import { Badge,Text, Box, Circle, Flex, Icon, Stack,Tooltip, useColorModeValue ,chakra,Image, VStack, color} from "@chakra-ui/react"
+// import {FiShoppingCart} from "@chakra-ui/react"
 import { useEffect } from "react"
 import { useSelector,useDispatch } from "react-redux"
+import { useSearchParams } from "react-router-dom"
 import { FilterCompo } from "../Components/FilterCompo"
 import { fetchData } from "../Redux/Products/action"
 import { store } from "../Redux/store"
+
 // import { dispatch } from "react"
 
 
 export const Products=()=>{
 
     const products=useSelector((store)=>store.footlockerData.products )
+    console.log("products",products)
+    const [searchParams]=useSearchParams()
+
+
+
+
 const dispatch=useDispatch()
+
+
     useEffect(()=>{
            if(products?.length=== 0)
            {
-            dispatch(fetchData())
+            let params={"gender":searchParams.getAll("gender")}
+            dispatch(fetchData(params))
            }
-    },[dispatch,products?.length])
+    },[dispatch,products?.length,searchParams])
+
+
     console.log(products)
 
     return(
         <> 
         <Box>
             <Stack display={{md: "flex"}} flexDirection={{md:"row"}}>
-            <Box>
+            <Box width={"35%"}>
                 <FilterCompo/>
             </Box>
-            <Box>
-                {/* products will appear here */}
+            <Box paddingTop={"100px"} >
+                <Flex px={12} flexWrap="wrap" className="riyaz" justifyContent={"space-between"} >
+                 {products.map((e)=>{
+                    return( <ProductAddToCart   key={e.id} gender={e.gender} title={e.title} img_url={e.img_url} price={e.price} color={e.color} />)
+                 })}
+                </Flex>
+               
             </Box>
             </Stack>
         </Box>
         </>
     )
 }
+
+function ProductAddToCart({gender,title,img_url,price,color}) {
+    return (
+      <Flex py={3} className="inside"    alignItems="center" >
+        <Box 
+          _hover={{boxShadow: "rgba(6, 24, 44, 0.4) 0px 0px 0px 1px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(105, 101, 101, 0.621) 0px 0px 0px inset"}}
+          bg={useColorModeValue('#f5f5f5', 'gray.800')}
+          maxW="sm"
+          alignItems={"center"}
+          borderWidth="1px"
+          shadow="lg"
+          position="relative" 
+          width={"270px"}
+        
+          
+          >
+          {(
+           <Box d="flex" alignItems="baseline">
+           {(
+             <Badge border={"1px solid black"} mx="4" my="4" py="4px" px="6px" color={"white"} bg="black" fontSize="1em" colorScheme="black">
+               New
+             </Badge>
+           )}
+         </Box>
+          )}
+  
+          <Image  p="40px"
+           borderBottom={"1px solid #dddddd"}
+           
+            src={img_url}
+            alt={`Picture of ${title}`}
+            // roundedTop="lg"
+          />
+  
+          <Box p="5" bg={"white"}>
+            {/* <Box d="flex" alignItems="baseline">
+              {(
+                <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
+                  New
+                </Badge>
+              )}
+            </Box> */}
+            <Flex mt="1" justifyContent="space-between" alignContent="center">
+              <Box
+                fontSize="2xl"
+                fontWeight="semibold"
+                as="h4"
+                lineHeight="tight"
+                isTruncated>
+                {title}
+              </Box>
+              
+            </Flex>
+            <Flex>
+                <Text>{gender}</Text>
+                <Text px={"4px"}>.</Text>
+                <Text>{color}</Text>
+            </Flex>
+  
+            <Flex justifyContent="space-between" alignContent="center">
+              {/* <Rating rating={data.rating} numReviews={data.numReviews} /> */}
+              <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
+                <Box as="span" >
+                  $
+                </Box>
+                {price.toFixed(2)}
+              </Box>
+            </Flex>
+          </Box>
+        </Box>
+      </Flex>
+    );
+  }

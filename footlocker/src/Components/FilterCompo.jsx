@@ -19,22 +19,27 @@ import { Box ,Text, Accordion,
 import {AddIcon,MinusIcon} from "@chakra-ui/icons"
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
-
+import { fetchData } from "../Redux/Products/action"
+import { useDispatch } from "react-redux"
+   
 export const FilterCompo=()=>{
 
     const [searchParams,setSearchParams]=useSearchParams()
-
-    const  [gendervalues,setGendervalues]=useState([])
+   console.log(searchParams.getAll("gender"))
+    const  [gendervalues,setGendervalues]=useState(searchParams.getAll("gender") ||[])
     const genderHandle =(values)=>{
-        console.log(values)
+        // console.log(values)
            setGendervalues(values)
     }
-
+const dispatch=useDispatch()
     useEffect(()=>{
         if(gendervalues){
-            setSearchParams({geneder:gendervalues},{replace:true})
+            setSearchParams({gender:gendervalues},{replace:true})
+            let params={"gender":searchParams.getAll("gender")}
+
+            dispatch(fetchData(params))
         }
-    })
+    },[gendervalues,searchParams, dispatch,setSearchParams])
     return(
         <>
         <Box>
@@ -62,7 +67,7 @@ export const FilterCompo=()=>{
                                     <AccordionPanel pb={4} display={{base:"none",md:"block"}} p="1rem 2rem">
                                             <CheckboxGroup colorScheme='blue' defaultValue={gendervalues}  onChange={genderHandle}>
                                             <VStack alignItems={"baseline"} spacing={[1, 5]} direction={['column', 'row']}>
-                                                <Checkbox value='mens'>Men's</Checkbox>
+                                                <Checkbox value="mens">Men's</Checkbox>
                                                 <Checkbox value='womens'>Women's</Checkbox>
                                                 <Checkbox value='boys'>Boy's</Checkbox>
                                                 <Checkbox value='girls'>Girl's</Checkbox>

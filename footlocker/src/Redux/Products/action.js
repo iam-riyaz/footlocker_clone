@@ -27,7 +27,7 @@ export const fetchData=(payload)=>{
     return(dispatch)=>{
         dispatch(fetchDataRequest());
 
-        Axios.get("/products")
+        Axios.get("/products",{params:{...payload}})
     .then(res=>dispatch(fetchDataSuccess(res.data)))
     .catch(err=>dispatch(fetchDataFailure(err.data)))
     }
