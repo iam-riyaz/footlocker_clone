@@ -10,7 +10,7 @@ import {Provider} from "react-redux"
 import {store} from "./Redux/store"
 
 
-axios.defaults.baseURL="http://localhost:8080"
+axios.defaults.baseURL="https://footlocker-backend.herokuapp.com"
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
