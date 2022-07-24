@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "json_server":"json-server --watch db.json --p 8080",
+    "json_server":"json-server --watch db.json --p 8081",
     "build": "vite build",
     "preview": "vite preview"
   },

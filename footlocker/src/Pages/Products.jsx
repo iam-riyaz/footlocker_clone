@@ -37,11 +37,11 @@ const dispatch=useDispatch()
         <> 
         <Box>
             <Stack display={{md: "flex"}} flexDirection={{md:"row"}}>
-            <Box width={"35%"}>
+            <Box >
                 <FilterCompo/>
             </Box>
             <Box paddingTop={"100px"} >
-                <Flex px={12} flexWrap="wrap" className="riyaz" justifyContent={"space-between"} >
+                <Flex px={12} flexWrap="wrap" className="riyaz" justifyContent={"inherit"} >
                  {products.map((e)=>{
                     return( <ProductAddToCart   key={e.id} gender={e.gender} title={e.title} img_url={e.img_url} price={e.price} color={e.color} />)
                  })}
@@ -56,7 +56,7 @@ const dispatch=useDispatch()
 
 function ProductAddToCart({gender,title,img_url,price,color}) {
     return (
-      <Flex py={3} className="inside"    alignItems="center" >
+      <Flex py={3} className="inside" marginRight={"20px"}   alignItems="center" >
         <Box 
           _hover={{boxShadow: "rgba(6, 24, 44, 0.4) 0px 0px 0px 1px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(105, 101, 101, 0.621) 0px 0px 0px inset"}}
           bg={useColorModeValue('#f5f5f5', 'gray.800')}
@@ -70,22 +70,22 @@ function ProductAddToCart({gender,title,img_url,price,color}) {
           
           >
           {(
-           <Box d="flex" alignItems="baseline">
-           {(
-             <Badge border={"1px solid black"} mx="4" my="4" py="4px" px="6px" color={"white"} bg="black" fontSize="1em" colorScheme="black">
-               New
-             </Badge>
-           )}
-         </Box>
-          )}
-  
-          <Image  p="40px"
+           <Box height={"250px"} d="flex" alignItems="baseline"  background={`url(${img_url}) center/contain no-repeat  `} >
+           {/* <Image  p="15px"
            borderBottom={"1px solid #dddddd"}
            
             src={img_url}
             alt={`Picture of ${title}`}
             // roundedTop="lg"
-          />
+          /> */}
+             <Badge border={"1px solid black"} mx="4" my="4" py="4px" px="6px" color={"white"} bg="black" fontSize="1em" colorScheme="black">
+               New
+             </Badge>
+           
+         </Box>
+          )}
+  
+          
   
           <Box p="5" bg={"white"}>
             {/* <Box d="flex" alignItems="baseline">
@@ -97,8 +97,8 @@ function ProductAddToCart({gender,title,img_url,price,color}) {
             </Box> */}
             <Flex mt="1" justifyContent="space-between" alignContent="center">
               <Box
-                fontSize="2xl"
-                fontWeight="semibold"
+                fontSize="l"
+                fontWeight="bold"
                 as="h4"
                 lineHeight="tight"
                 isTruncated>
@@ -106,7 +106,7 @@ function ProductAddToCart({gender,title,img_url,price,color}) {
               </Box>
               
             </Flex>
-            <Flex>
+            <Flex color={"#6b6b6b"}>
                 <Text>{gender}</Text>
                 <Text px={"4px"}>.</Text>
                 <Text>{color}</Text>
@@ -114,7 +114,7 @@ function ProductAddToCart({gender,title,img_url,price,color}) {
   
             <Flex justifyContent="space-between" alignContent="center">
               {/* <Rating rating={data.rating} numReviews={data.numReviews} /> */}
-              <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
+              <Box fontSize="xl" color="black">
                 <Box as="span" >
                   $
                 </Box>

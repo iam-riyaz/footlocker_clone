@@ -28,7 +28,7 @@ export const fetchData=(payload)=>{
         dispatch(fetchDataRequest());
 
         Axios.get("/products",{params:{...payload}})
-    .then(res=>dispatch(fetchDataSuccess(res.data)))
+    .then(res=>  dispatch(fetchDataSuccess(res.data)))
     .catch(err=>dispatch(fetchDataFailure(err.data)))
     }
 }

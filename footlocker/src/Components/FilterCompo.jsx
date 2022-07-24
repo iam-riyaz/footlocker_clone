@@ -42,7 +42,7 @@ const dispatch=useDispatch()
     },[gendervalues,searchParams, dispatch,setSearchParams])
     return(
         <>
-        <Box>
+        <Box width={"260px"}>
             <Box>
                 <Text fontSize="2xl">Refine Results</Text>
                 <Box>
@@ -67,10 +67,10 @@ const dispatch=useDispatch()
                                     <AccordionPanel pb={4} display={{base:"none",md:"block"}} p="1rem 2rem">
                                             <CheckboxGroup colorScheme='blue' defaultValue={gendervalues}  onChange={genderHandle}>
                                             <VStack alignItems={"baseline"} spacing={[1, 5]} direction={['column', 'row']}>
-                                                <Checkbox value="mens">Men's</Checkbox>
-                                                <Checkbox value='womens'>Women's</Checkbox>
-                                                <Checkbox value='boys'>Boy's</Checkbox>
-                                                <Checkbox value='girls'>Girl's</Checkbox>
+                                                <Checkbox value="Men's">Men's</Checkbox>
+                                                <Checkbox value="Women's">Women's</Checkbox>
+                                                <Checkbox value="Boy's">Boy's</Checkbox>
+                                                <Checkbox value="Girl's">Girl's</Checkbox>
                                             </VStack>
                                             </CheckboxGroup>
                                     </AccordionPanel>
