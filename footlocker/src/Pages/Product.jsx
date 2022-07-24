@@ -1,10 +1,53 @@
-import { Badge, Box, Circle, Flex, Icon, Tooltip } from "@chakra-ui/react";
+// import { Badge, Box, Circle, Flex, Icon, Tooltip } from "@chakra-ui/react";
+import { useEffect } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAddToCart, fetchSingleProduct } from "../Redux/Products/action";
+import { store } from "../Redux/store";
+import "./Products"
+
+
+import {
+  Box,
+  chakra,
+  Container,
+  Stack,
+  Text,
+  Image,
+  Flex,
+  VStack,
+  Button,
+  Heading,
+  SimpleGrid,
+  StackDivider,
+  useColorModeValue,
+  VisuallyHidden,
+  List,
+  ListItem,
+} from '@chakra-ui/react';
+import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { MdLocalShipping } from 'react-icons/md'
+import { StarIcon } from "@chakra-ui/icons";
 
 
 export const Product=()=>{
+
+  const {id}=useParams()
+  // console.log(params)
+
+  const singleProduct=useSelector(store=>store.footlockerData.singleProduct)
+  
+  const dispatch=useDispatch()
+  useEffect(()=>{
+    if(id){
+     dispatch(fetchSingleProduct(id))
+    }
+  },[dispatch,id])
+
+  console.log(singleProduct)
     return (
         <>
-        <ProductAddToCart/>
+        <Simple dispatch={dispatch} singleProduct={singleProduct} title={singleProduct.title} img_url={singleProduct.img_url} brand={singleProduct.brand} color={singleProduct.color} price={singleProduct.price} gender={singleProduct.gender} />
         </>
     )
 }
@@ -13,85 +56,189 @@ export const Product=()=>{
 
 
 
-const data = {
-    isNew: true,
-    imageURL:
-      'https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=4600&q=80',
-    name: 'Wayfarer Classic',
-    price: 4.5,
-    rating: 4.2,
-    numReviews: 34,
-  };
+
+ function Simple({dispatch,singleProduct, title,img_url,brand,color,price}) {
 
 
+     const addToCartHandle=()=>{
+      if(singleProduct){
+        dispatch(fetchAddToCart(singleProduct))
+      }
+     }
 
-
-function ProductAddToCart() {
-    return (
-      <Flex p={50} w="full" alignItems="center" justifyContent="center">
-        <Box
-          bg={useColorModeValue('white', 'gray.800')}
-          maxW="sm"
-          borderWidth="1px"
-          rounded="lg"
-          shadow="lg"
-          position="relative">
-          {data.isNew && (
-            <Circle
-              size="10px"
-              position="absolute"
-              top={2}
-              right={2}
-              bg="red.200"
-            />
-          )}
-  
+  return (
+    <Container maxW={'7xl'}>
+      <SimpleGrid
+        columns={{ base: 1, lg: 2 }}
+        spacing={{ base: 8, md: 10 }}
+        py={{ base: 18, md: 24 }}>
+        <Flex>
           <Image
-            src={data.imageURL}
-            alt={`Picture of ${data.name}`}
-            roundedTop="lg"
+            rounded={'md'}
+            alt={'product image'}
+            src={
+              img_url
+            }
+            fit={'cover'}
+            align={'center'}
+            w={'100%'}
+            h={{ base: '100%', sm: '400px', lg: '500px' }}
           />
-  
-          <Box p="6">
-            <Box d="flex" alignItems="baseline">
-              {data.isNew && (
-                <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
-                  New
-                </Badge>
-              )}
+        </Flex>
+        <Stack spacing={{ base: 6, md: 10 }}>
+          <Box as={'header'}>
+            <Heading
+              lineHeight={1.1}
+              fontWeight={600}
+              fontSize={{ base: '2xl', sm: '4xl', lg: '5xl' }}>
+              {title}
+            </Heading>
+            <Box color={"gray"}>
+            <StarIcon/>
+            <StarIcon/>
+            <StarIcon/>
+            <StarIcon/>
+            <StarIcon/>
             </Box>
-            <Flex mt="1" justifyContent="space-between" alignContent="center">
-              <Box
-                fontSize="2xl"
-                fontWeight="semibold"
-                as="h4"
-                lineHeight="tight"
-                isTruncated>
-                {data.name}
-              </Box>
-              <Tooltip
-                label="Add to cart"
-                bg="white"
-                placement={'top'}
-                color={'gray.800'}
-                fontSize={'1.2em'}>
-                <chakra.a href={'#'} display={'flex'}>
-                  <Icon as={FiShoppingCart} h={7} w={7} alignSelf={'center'} />
-                </chakra.a>
-              </Tooltip>
-            </Flex>
-  
-            <Flex justifyContent="space-between" alignContent="center">
-              <Rating rating={data.rating} numReviews={data.numReviews} />
-              <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-                <Box as="span" color={'gray.600'} fontSize="lg">
-                  £
-                </Box>
-                {data.price.toFixed(2)}
-              </Box>
-            </Flex>
+            <Text
+              color={useColorModeValue('gray.900', 'gray.400')}
+              fontWeight={300}
+              fontSize={'2xl'}>
+              ${price}
+            </Text>
           </Box>
-        </Box>
-      </Flex>
-    );
-  }
+
+          <Stack
+            spacing={{ base: 4, sm: 6 }}
+            direction={'column'}
+            divider={
+              <StackDivider
+                borderColor={useColorModeValue('gray.200', 'gray.600')}
+              />
+            }>
+            <VStack spacing={{ base: 4, sm: 6 }}>
+              <Text
+                color={useColorModeValue('gray.500', 'gray.400')}
+                fontSize={'2xl'}
+                fontWeight={'300'}>
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                diam nonumy eirmod tempor invidunt ut labore
+              </Text>
+              <Text fontSize={'lg'}>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                aliquid amet at delectus doloribus dolorum expedita hic, ipsum
+                maxime modi nam officiis porro, quae, quisquam quos
+                reprehenderit velit? Natus, totam.
+              </Text>
+            </VStack>
+            <Box>
+              <Text
+                fontSize={{ base: '16px', lg: '18px' }}
+                color={useColorModeValue('yellow.500', 'yellow.300')}
+                fontWeight={'500'}
+                textTransform={'uppercase'}
+                mb={'4'}>
+                Features
+              </Text>
+
+              <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+                <List spacing={2}>
+                  <ListItem>Chronograph</ListItem>
+                  <ListItem>Master Chronometer Certified</ListItem>{' '}
+                  <ListItem>Tachymeter</ListItem>
+                </List>
+                <List spacing={2}>
+                  <ListItem>Anti‑magnetic</ListItem>
+                  <ListItem>Chronometer</ListItem>
+                  <ListItem>Small seconds</ListItem>
+                </List>
+              </SimpleGrid>
+            </Box>
+            <Box>
+              <Text
+                fontSize={{ base: '16px', lg: '18px' }}
+                color={useColorModeValue('yellow.500', 'yellow.300')}
+                fontWeight={'500'}
+                textTransform={'uppercase'}
+                mb={'4'}>
+                Product Details
+              </Text>
+
+              <List spacing={2}>
+                <ListItem>
+                  <Text as={'span'} fontWeight={'bold'}>
+                    Between lugs:
+                  </Text>{' '}
+                  20 mm
+                </ListItem>
+                <ListItem>
+                  <Text as={'span'} fontWeight={'bold'}>
+                    Bracelet:
+                  </Text>{' '}
+                  leather strap
+                </ListItem>
+                <ListItem>
+                  <Text as={'span'} fontWeight={'bold'}>
+                    Case:
+                  </Text>{' '}
+                  Steel
+                </ListItem>
+                <ListItem>
+                  <Text as={'span'} fontWeight={'bold'}>
+                    Case diameter:
+                  </Text>{' '}
+                  42 mm
+                </ListItem>
+                <ListItem>
+                  <Text as={'span'} fontWeight={'bold'}>
+                    Dial color:
+                  </Text>{' '}
+                  Black
+                </ListItem>
+                <ListItem>
+                  <Text as={'span'} fontWeight={'bold'}>
+                    Crystal:
+                  </Text>{' '}
+                  Domed, scratch‑resistant sapphire crystal with anti‑reflective
+                  treatment inside
+                </ListItem>
+                <ListItem>
+                  <Text as={'span'} fontWeight={'bold'}>
+                    Water resistance:
+                  </Text>{' '}
+                  5 bar (50 metres / 167 feet){' '}
+                </ListItem>
+              </List>
+            </Box>
+          </Stack>
+
+          <Button
+            rounded={'none'}
+            w={'full'}
+            mt={8}
+            size={'lg'}
+            py={'7'}
+            bg={useColorModeValue('gray.900', 'gray.50')}
+            color={useColorModeValue('white', 'gray.900')}
+            textTransform={'uppercase'}
+            _hover={{
+              transform: 'translateY(2px)',
+              boxShadow: 'lg',
+            }} 
+            onClick={addToCartHandle}>
+            Add to cart
+          </Button>
+
+          <Stack direction="row" alignItems="center" justifyContent={'center'}>
+            <MdLocalShipping />
+            <Text>2-3 business days delivery</Text>
+          </Stack>
+        </Stack>
+      </SimpleGrid>
+    </Container>
+  );
+}
+
+
+
+

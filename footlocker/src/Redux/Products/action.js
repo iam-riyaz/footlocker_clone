@@ -1,7 +1,11 @@
 import * as types from "./actionType"
 import Axios  from "axios"
-const fetchDataRequest=(payload)=>{
+import { Product } from "../../Pages/Product"
 
+
+
+// --------------- all products-------------------------------------
+const fetchDataRequest=(payload)=>{
 return{
     type: types.FETCH_DATA_REQUEST,
     payload
@@ -32,3 +36,75 @@ export const fetchData=(payload)=>{
     .catch(err=>dispatch(fetchDataFailure(err.data)))
     }
 }
+// ----------end------------------------------------
+
+
+
+// -------------single product start--------------
+
+        const fetchSingleProductRequest=(payload)=>{
+            return{
+                type:types.FETCH_SINGLE_PRODUCT_REQUEST,
+                payload
+            }
+        }
+
+        const fetchSingleProductSuccess=(payload)=>{
+            return{
+                type:types.FETCH_SINGLE_PRODUCT_SUCCESS,
+                payload
+            }
+        }
+        const fetchSingleProductFailure=(payload)=>{
+                return{
+                    type:types.FETCH_SINGLE_PRODUCT_FAILURE,
+                    payload
+                }
+            }
+    
+export const fetchSingleProduct=(payload)=>{
+    return(dispatch)=>{
+        dispatch(fetchSingleProductRequest());
+
+        Axios.get(`/products/${payload}`)
+        .then(res=>dispatch(fetchSingleProductSuccess(res.data)))
+        .catch(err=>dispatch(fetchSingleProductFailure(err.data)))
+    }
+}
+
+// ----------end-------------------------
+
+
+// ------------add to cart ----------------------------
+
+const addToCartRequest=(payload)=>{
+    return{
+        type: types.ADD_TO_CART_REQUEST,
+        payload
+    }
+    
+    }
+    
+    const addToCartSuccess=(payload)=>{
+        return{
+            type:types.ADD_TO_CART_SUCCESS,
+            payload
+        }
+    }
+    
+    const addToCartFailure=(payload)=>{
+        return{
+            type:types.ADD_TO_CART_FAILURE,
+            payload
+        }
+    }
+
+    export const fetchAddToCart=(payload)=>{
+        return(dispatch)=>{
+            dispatch(addToCartRequest());
+
+            Axios.post("/cart",payload)
+            .then(res=>addToCartSuccess(res.data))
+            .catch(err=>addToCartRequest(err.data))
+        }
+    }
