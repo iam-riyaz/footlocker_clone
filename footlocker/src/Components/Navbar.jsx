@@ -80,18 +80,18 @@ export  function Navbar() {
           <Image height={"2rem"} src="https://www.footlocker.com/built/227/images/FL/logo.svg"/>
           <HStack 
           className='navlink_div'
-          marginLeft={"5rem"} 
+          marginLeft={"80px"} 
           color={"white"}
           >
-           < NavLink  to={"/new_arrivals"}> NEW AARRIVALS</NavLink>
-           < NavLink to={"/mans"}> MAN'S</NavLink>
-           < NavLink to={"/womans"}>WOMANS'S </NavLink>
-           < NavLink to={"/kids"}>KIDS </NavLink>
-           < NavLink to={"/clothing"}>CLOTHING </NavLink>
-           < NavLink to={"/release"}>RELEASE </NavLink>
-           < NavLink to={"/brand"}> BRAND</NavLink>
-           < NavLink to={"/sale"}>SALE </NavLink>
-           < NavLink to={"/flx"}> FLX REWARDS </NavLink>
+           < NavLink paddingLeft={"200px"} to={"/new_arrivals"}> NEW AARRIVALS</NavLink>
+           < NavLink paddingLeft={"200px"} to={"/mans"}> MAN'S</NavLink>
+           < NavLink paddingLeft={"200px"} to={"/womans"}>WOMANS'S </NavLink>
+           < NavLink paddingLeft={"200px"} to={"/kids"}>KIDS </NavLink>
+           < NavLink paddingLeft={"200px"} to={"/clothing"}>CLOTHING </NavLink>
+           < NavLink paddingLeft={"200px"} to={"/release"}>RELEASE </NavLink>
+           < NavLink paddingLeft={"200px"} to={"/brand"}> BRAND</NavLink>
+           < NavLink paddingLeft={"200px"} to={"/sale"}>SALE </NavLink>
+           < NavLink paddingLeft={"200px"} to={"/flx"}> FLX REWARDS </NavLink>
           </HStack>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>

@@ -94,7 +94,7 @@ const dispatch=useDispatch()
                                     </AccordionButton>
                                     </h2>
                                     <AccordionPanel pb={4}>
-                                            <CheckboxGroup colorScheme='blue' defaultValue={gendervalues}  onChange={genderHandle}>
+                                            <CheckboxGroup colorScheme='blue' defaultValue={gendervalues}  onChange={()=>genderHandle()}>
                                             <VStack alignItems={"baseline"} spacing={[1, 5]} direction={['column', 'row']}>
                                                 <Checkbox value='mens'>Men's</Checkbox>
                                                 <Checkbox value='womens'>Women's</Checkbox>

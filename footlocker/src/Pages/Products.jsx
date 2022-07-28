@@ -28,7 +28,7 @@ const dispatch=useDispatch()
             let params={"gender":searchParams.getAll("gender")}
             dispatch(fetchData(params))
            }
-    },[dispatch,products?.length,searchParams])
+    },[dispatch,products?.length,searchParams,products])
 
 
     console.log(products)
