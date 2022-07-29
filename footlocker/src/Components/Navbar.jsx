@@ -28,6 +28,7 @@ import {
 } from '@chakra-ui/icons';
 
 import {NavLink} from "react-router-dom"
+import { CartIcon } from "./CartIcon";
 
 export  function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
@@ -124,6 +125,7 @@ export  function Navbar() {
             }}>
             Sign Up
           </Button>
+          <CartIcon/>
         </Stack>
       </Flex>
 

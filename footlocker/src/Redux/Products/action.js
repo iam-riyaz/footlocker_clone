@@ -1,6 +1,7 @@
 import * as types from "./actionType"
 import Axios  from "axios"
 import { Product } from "../../Pages/Product"
+import axios from "axios"
 
 
 
@@ -105,6 +106,46 @@ const addToCartRequest=(payload)=>{
 
             Axios.post("/cart",payload)
             .then(res=>addToCartSuccess(res.data))
-            .catch(err=>addToCartRequest(err.data))
+            .catch(err=>addToCartFailure(err.data))
         }
     }
+    // -------------end----------------------
+
+
+
+
+    // --------------------ADD product to cart in UI-----------------
+
+
+    const fetchToCartRequest=(payload)=>{
+        return{
+            type: types.FETCH_TO_CART_REQUEST,
+            payload
+        }
+        
+        }
+        
+        const fetchToCartSuccess=(payload)=>{
+            return{
+                type:types.FETCH_TO_CART_SUCCESS,
+                payload
+            }
+        }
+        
+        const fetchToCartFailure=(payload)=>{
+            return{
+                type:types.FETCH_TO_CART_FAILURE,
+                payload
+            }
+        }
+
+        export const fetchToUICart=(payload)=>{
+         
+            return(dispatch)=>{
+                dispatch(fetchToCartRequest())
+
+                Axios.get("/cart")
+                .then(res=>dispatch(fetchToCartSuccess(res.data)))
+                .catch(err=>dispatch(fetchToCartFailure(err.data)))
+            }
+        }
