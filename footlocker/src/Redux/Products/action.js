@@ -149,3 +149,38 @@ const addToCartRequest=(payload)=>{
                 .catch(err=>dispatch(fetchToCartFailure(err.data)))
             }
         }
+
+        // ------------------end-------------
+
+
+        // -------------remove from cart---------------
+
+        const removeCartRequest=(payload)=>{
+            return{
+                type: types.REMOVE_FROM_CART_REQUEST,
+                payload
+            }
+            
+            }
+            
+            const removeCartSuccess=(payload)=>{
+                return{
+                    type:types.REMOVE_FROM_CART_SUCCESS,
+                    payload
+                }
+            }
+            
+            const removeCartFailure=(payload)=>{
+                return{
+                    type:types.REMOVE_FROM_CART_FAILURE,
+                    payload
+                }
+            }
+
+            export const removeCart=(id)=>dispatch=>{
+
+                dispatch(removeCartRequest())
+                Axios.delete(`/cart/${id}`)
+                .then(res=>dispatch( console.log(res,data), removeCartSuccess(res.data)))
+                .catch(err=>dispatch( removeCartFailure(err.data)))
+            }
