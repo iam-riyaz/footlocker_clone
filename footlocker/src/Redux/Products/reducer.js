@@ -89,7 +89,27 @@ export const reducer=(state=initialState, action)=>{
                     ...state,
                     error:payload,
                     loading:false  
-                }             
+                } 
+                case types.REMOVE_FROM_CART_REQUEST:
+                return{ 
+                    ...state,
+                    error:"",
+                    loading:true
+                    }
+            case types.REMOVE_FROM_CART_SUCCESS:
+                return{
+                    ...state,
+                    cart:[...payload ],
+                    error:"",
+                    loading:false
+                }  
+                case types.REMOVE_FROM_CART_FAILURE:
+                return{
+                    ...state,
+                    error:payload,
+                    loading:false  
+                } 
+
         default:
             return state    
     }

@@ -18,7 +18,7 @@ import {
   import { CloseButton,   Select, useColorModeValue } from '@chakra-ui/react'
   import { FaArrowRight } from 'react-icons/fa'
  
-  import { useSelector } from 'react-redux'
+  import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import { useEffect } from 'react'
 // import { PriceTag } from './PriceTag'
@@ -27,44 +27,49 @@ import { removeCart } from '../Redux/Products/action'
 
 
 
-export const cartData = [
-    {
-      id: '1',
-      price: 39.99,
-      currency: 'GBP',
-      name: 'Ferragamo bag',
-      description: 'Tan, 40mm',
-      quantity: 3,
-      imageUrl:
-        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80',
-    },
-    {
-      id: '2',
-      price: 39.99,
-      currency: 'GBP',
-      name: 'Bamboo Tan',
-      description: 'Tan, 40mm',
-      quantity: 3,
-      imageUrl:
-        'https://images.unsplash.com/photo-1591561954557-26941169b49e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80',
-    },
-    {
-      id: '3',
-      price: 39.99,
-      currency: 'GBP',
-      name: 'Yeezy Sneakers',
-      description: 'Tan, 40mm',
-      quantity: 3,
-      imageUrl:
-        'https://images.unsplash.com/photo-1604671801908-6f0c6a092c05?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1770&q=80',
-    },
-  ]
+// export const cartData = [
+//     {
+//       id: '1',
+//       price: 39.99,
+//       currency: 'GBP',
+//       name: 'Ferragamo bag',
+//       description: 'Tan, 40mm',
+//       quantity: 3,
+//       imageUrl:
+//         'https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80',
+//     },
+//     {
+//       id: '2',
+//       price: 39.99,
+//       currency: 'GBP',
+//       name: 'Bamboo Tan',
+//       description: 'Tan, 40mm',
+//       quantity: 3,
+//       imageUrl:
+//         'https://images.unsplash.com/photo-1591561954557-26941169b49e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80',
+//     },
+//     {
+//       id: '3',
+//       price: 39.99,
+//       currency: 'GBP',
+//       name: 'Yeezy Sneakers',
+//       description: 'Tan, 40mm',
+//       quantity: 3,
+//       imageUrl:
+//         'https://images.unsplash.com/photo-1604671801908-6f0c6a092c05?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1770&q=80',
+//     },
+//   ]
 
 export const Cart=()=>{
 
-
+   const dispatch=useDispatch()
     const cart=useSelector(store=>store.footlockerData.cart)
     
+    const removeProduct=(id)=>{
+       console.log("riyaz",id)
+        dispatch(removeCart(id))
+
+    }
 
     return(
         <>
@@ -111,7 +116,7 @@ export const Cart=()=>{
 
         <Stack spacing="6">
           {cart.map((item) => (
-            <CartItem key={item.id} {...item} />
+            <CartItem removeProduct={removeProduct} id={item.id} key={item.id} {...item} />
           ))}
         </Stack>
       </Stack>
@@ -155,6 +160,7 @@ const QuantitySelect = (props) => {
     const {
       isGiftWrapping,
       title,
+      id,
       color,
       gender,
       quantity,
@@ -162,6 +168,7 @@ const QuantitySelect = (props) => {
       currency,
       price,
       onChangeQuantity,
+      removeProduct,
       onClickDelete,
     } = props
     return (
@@ -197,7 +204,7 @@ const QuantitySelect = (props) => {
             }}
           />
           <PriceTag price={price} currency={currency} />
-          <CloseButton aria-label={`Delete ${name} from cart`} onClick={onClickDelete} />
+          <CloseButton aria-label={`Delete ${name} from cart`} onClick={removeProduct(id)} />
         </Flex>
   
         {/* Mobile */}

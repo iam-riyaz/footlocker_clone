@@ -181,6 +181,6 @@ const addToCartRequest=(payload)=>{
 
                 dispatch(removeCartRequest())
                 Axios.delete(`/cart/${id}`)
-                .then(res=>dispatch( console.log(res,data), removeCartSuccess(res.data)))
+                .then(res=>dispatch( removeCartSuccess(res.data)))
                 .catch(err=>dispatch( removeCartFailure(err.data)))
             }
